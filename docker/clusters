@@ -1,3 +1,4 @@
+# Cluster_name : Cluster API URL
 CLUSTER1: https://api.crc.testing:6443
 CLUSTER2: https://api.crc.testing:6443
 CLUSTER3: https://api.crc.testing:6443
