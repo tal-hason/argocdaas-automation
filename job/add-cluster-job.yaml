@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: argocd
-          image: quay.io/thason/argo-oc-tool:v4
+          image: quay.io/thason/argo-oc-tool:v9
           command: ["/bin/sh", "-c"]
           args:
             - wget https://raw.githubusercontent.com/tal-hason/argocdaas-automation/main/docker/clusters
@@ -15,4 +15,5 @@ spec:
           envFrom:
             - configMapRef:
                 name: argocd-env-configmap
+      restartPolicy: Never
   backoffLimit: 0
