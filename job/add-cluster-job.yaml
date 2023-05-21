@@ -10,33 +10,9 @@ spec:
           image: quay.io/thason/argo-oc-tool:v4
           command: ["/bin/sh", "-c"]
           args:
+            - wget https://raw.githubusercontent.com/tal-hason/argocdaas-automation/main/docker/clusters
             - add-cluster.sh
           envFrom:
             - configMapRef:
                 name: argocd-env-configmap
   backoffLimit: 0
-
-
----
-kind: Pod
-apiVersion: v1
-metadata:
-  name: argocd-add-cluster-job
-spec:
-  containers:
-    - resources: {}
-      name: argocd
-      command:
-        - /bin/sh
-        - '-c'
-      image: quay.io/thason/argo-oc-tool:v4
-      args:
-        - sleep 600000
-      envFrom:
-        - configMapRef:
-            name: argocd-env-configmap
-  serviceAccount: default
-
-
-
-export CLUSTER_SERVER=$(kubectl config view --minify --output 'jsonpath={.current-context}' --kubeconfig=/.kube/config)
