@@ -1,0 +1,28 @@
+FROM quay.io/fedora/fedora:latest
+
+# Create app directory
+WORKDIR /tmp
+
+USER root
+
+RUN mkdir -p /.kube && mkdir -p /.config \
+ && chown 1000:0  /.kube && chown 1000:0 /.config \
+ && chmod -R 0775 /.kube && chmod -R 0775 /.config
+
+RUN dnf install wget -y
+
+RUN wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 \
+    && chmod a+x /usr/local/bin/yq
+
+RUN wget https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz \ 
+    && tar xvf openshift-client-linux.tar.gz \
+    && cp oc kubectl /usr/local/bin/ \
+    && rm -f oc kubectl openshift-client-linux.tar.gz README.md
+
+RUN wget -qO /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.7.2/argocd-linux-amd64 \
+    && chmod a+x /usr/local/bin/argocd
+
+
+USER 1000
+
+COPY add-cluster.sh .

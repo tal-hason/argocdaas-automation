@@ -1,0 +1,13 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: argocd-env-configmap
+data:
+  ARGOCD_PASSWORD: QOKYADwVLianx2u6qSpeTU1W9l3jGBZf
+  ARGOCD_SERVER: openshift-gitops-server
+  ARGOCD_USERNAME: admin
+  CLUSTER_CA_CONFIGMAP: kube-root-ca.crt
+  CLUSTER_NAME: openshift-local
+  CLUSTER_SERVER: 'api.crc.testing:6443'
+  CLUSTER_TOKEN: sha256~fIyIzkiEJWitji39RPfx4lqx8wG6x5PmjtBsBGQUN3o
+  CLUSTER_API_URL: https://api.crc.testing:6443
